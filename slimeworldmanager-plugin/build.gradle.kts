@@ -15,7 +15,6 @@ dependencies {
     implementation("com.zaxxer:HikariCP:5.0.1")
     implementation("org.mongodb:mongo-java-driver:3.12.11")
     implementation("io.lettuce:lettuce-core:6.2.1.RELEASE")
-    implementation("com.github.tomas-langer:chalk:1.0.2")
 }
 
 tasks {

@@ -28,7 +28,6 @@ import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
-import java.util.Optional;
 
 public class v1_9SlimeWorldFormat implements SlimeWorldReader {
 
@@ -210,7 +209,8 @@ public class v1_9SlimeWorldFormat implements SlimeWorldReader {
             if (propertiesMap.isPresent()) {
                 worldPropertyMap = new SlimePropertyMap(propertiesMap.get());
                 worldPropertyMap.merge(propertyMap); // Override world properties
-            } else */ if (propertyMap == null) { // Make sure the property map is never null
+            } else */
+            if (propertyMap == null) { // Make sure the property map is never null
                 worldPropertyMap = new SlimePropertyMap();
             }
 

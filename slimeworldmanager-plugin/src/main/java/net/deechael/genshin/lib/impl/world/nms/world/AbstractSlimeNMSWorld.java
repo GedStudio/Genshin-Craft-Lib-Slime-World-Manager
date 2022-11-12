@@ -14,7 +14,6 @@ import net.deechael.genshin.lib.impl.world.nms.SlimeLogger;
 import net.deechael.genshin.lib.impl.world.nms.SlimeNMS;
 import net.deechael.genshin.lib.open.world.SlimeChunk;
 import net.deechael.genshin.lib.open.world.loaders.SlimeLoader;
-import net.deechael.genshin.lib.open.world.properties.SlimeProperties;
 import net.deechael.genshin.lib.open.world.properties.SlimePropertyMap;
 import net.deechael.genshin.lib.open.world.utils.SlimeFormat;
 

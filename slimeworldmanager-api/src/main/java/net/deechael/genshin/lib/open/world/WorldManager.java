@@ -1,7 +1,6 @@
 package net.deechael.genshin.lib.open.world;
 
 import net.deechael.genshin.lib.open.world.exceptions.WorldAlreadyExistsException;
-import net.deechael.genshin.lib.open.world.properties.SlimePropertyMap;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -47,6 +46,8 @@ public abstract class WorldManager {
     public abstract SlimeWorld createOrLoad(Plugin plugin, DataSource dataSource, String worldName);
 
     public abstract SlimeWorld load(Plugin plugin, DataSource dataSource, String worldName);
+
+    public abstract void unload(Plugin plugin, SlimeWorld world);
 
     public abstract boolean exists(Plugin plugin, DataSource dataSource, String worldName);
 

@@ -174,6 +174,11 @@ public final class WorldManagerImpl extends WorldManager {
     }
 
     @Override
+    public void unload(Plugin plugin, SlimeWorld world) {
+        Bukkit.unloadWorld(world.asBukkit(), true);
+    }
+
+    @Override
     public boolean exists(Plugin plugin, DataSource dataSource, String worldName) {
         SlimeLoader loader = SlimeManagerImpl.getInstance().getLoader(dataSource);
         try {
