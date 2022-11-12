@@ -8,7 +8,7 @@ dependencies {
 
     compileOnly("io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT")
 
-    implementation(project(":slimeworldmanager-api"))
+    implementation(project(":gs-world-api"))
 
     implementation("com.flowpowered:flow-nbt:2.0.2")
     implementation("com.github.luben:zstd-jni:1.5.2-2")

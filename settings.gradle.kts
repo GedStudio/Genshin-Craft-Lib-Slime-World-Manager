@@ -7,7 +7,7 @@ pluginManagement {
 }
 
 
-rootProject.name = "slimeworldmanager"
-include(":slimeworldmanager-api")
-include(":slimeworldmanager-plugin")
-include(":slimeworldmanager-clsm")
+rootProject.name = "gs-world"
+include(":gs-world-api")
+include(":gs-world-plugin")
+include(":gs-world-clsm")

@@ -73,3 +73,5 @@ This two classes are the main part of modified swm:
 SlimeManager slimeManager = SlimeManager.getManager(); // Original SWMPlugin.class
 WorldManager worldManager = WorldManager.getManager(); // Added by DeeChael
 ```
+
+#### Don't forget to use the modified classmodifier in gs-world-clsm module!
