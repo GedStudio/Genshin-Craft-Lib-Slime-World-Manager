@@ -7,12 +7,14 @@ import com.flowpowered.nbt.TagType;
 import com.flowpowered.nbt.stream.NBTInputStream;
 import com.flowpowered.nbt.stream.NBTOutputStream;
 import com.github.luben.zstd.Zstd;
+import com.google.gson.Gson;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.deechael.genshin.lib.impl.world.nms.NmsUtil;
 import net.deechael.genshin.lib.impl.world.nms.SlimeLogger;
 import net.deechael.genshin.lib.impl.world.nms.SlimeNMS;
 import net.deechael.genshin.lib.open.world.SlimeChunk;
 import net.deechael.genshin.lib.open.world.loaders.SlimeLoader;
+import net.deechael.genshin.lib.open.world.properties.SlimeProperties;
 import net.deechael.genshin.lib.open.world.properties.SlimePropertyMap;
 import net.deechael.genshin.lib.open.world.utils.SlimeFormat;
 
@@ -20,12 +22,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.nio.ByteOrder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 import static net.deechael.genshin.lib.open.world.properties.SlimeProperties.*;
 
 public abstract class AbstractSlimeNMSWorld extends AbstractSlimeLoadedWorld {
+
+    private final static Gson GSON = new Gson();
 
     protected final SlimeNMS nms;
 
@@ -82,6 +87,16 @@ public abstract class AbstractSlimeNMSWorld extends AbstractSlimeLoadedWorld {
             // File Header and Slime version
             outStream.write(SlimeFormat.SLIME_HEADER);
             outStream.write(SlimeFormat.SLIME_VERSION);
+
+            // Slime Property Map
+            Long seed = this.propertyMap.getValue(SEED);
+            if (seed == null || seed == 114514L)
+                this.propertyMap.setValue(SEED, this.asBukkit().getSeed());
+            byte[] bytes = GSON.toJson(this.propertyMap.toJson()).getBytes(StandardCharsets.UTF_8);
+            outStream.writeInt(bytes.length);
+            for (byte b : bytes) {
+                outStream.writeByte(b);
+            }
 
             // World version
             outStream.writeByte(version);

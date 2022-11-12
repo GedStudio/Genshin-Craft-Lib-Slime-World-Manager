@@ -8,8 +8,11 @@ import org.bukkit.Difficulty;
 import org.bukkit.World;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class WorldData {
+
+    private final static Random RANDOM = new Random();
 
     @Getter
     @Setter
@@ -47,6 +50,9 @@ public class WorldData {
     @Getter
     @Setter
     private boolean readOnly = false;
+    @Getter
+    @Setter
+    private long seed = RANDOM.nextLong(999999999999999L);
 
     public SlimePropertyMap toPropertyMap() {
         try {
@@ -99,6 +105,7 @@ public class WorldData {
         propertyMap.setValue(SlimeProperties.ENVIRONMENT, environment);
         propertyMap.setValue(SlimeProperties.WORLD_TYPE, worldType);
         propertyMap.setValue(SlimeProperties.DEFAULT_BIOME, defaultBiome);
+        propertyMap.setValue(SlimeProperties.SEED, seed);
 
         return propertyMap;
     }
@@ -118,6 +125,7 @@ public class WorldData {
         worldData.environment = propertyMap.getValue(SlimeProperties.ENVIRONMENT);
         worldData.worldType = propertyMap.getValue(SlimeProperties.WORLD_TYPE);
         worldData.defaultBiome = propertyMap.getValue(SlimeProperties.DEFAULT_BIOME);
+        worldData.seed = propertyMap.getValue(SlimeProperties.SEED);
         return worldData;
     }
 

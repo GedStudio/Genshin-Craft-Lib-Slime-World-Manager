@@ -75,7 +75,7 @@ public class SlimeManagerImpl implements net.deechael.genshin.lib.open.world.Sli
         plugin.getServer().getPluginManager().registerEvents(new WorldUnlocker(), plugin);
 
         loadedWorlds.values().stream()
-                .filter(slimeWorld -> Objects.isNull(Bukkit.getWorld(slimeWorld.getName())))
+                .filter(slimeWorld -> Objects.isNull(slimeWorld.asBukkit()))
                 .forEach(this::generateWorld);
 
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -84,8 +84,7 @@ public class SlimeManagerImpl implements net.deechael.genshin.lib.open.world.Sli
     }
 
     public void disabling() {
-        Bukkit.getWorlds().stream()
-                .map(world -> getNms().getSlimeWorld(world))
+        WorldManager.getManager().list(plugin).stream()
                 .filter(Objects::nonNull)
                 .filter((slimeWorld -> !slimeWorld.isReadOnly()))
                 .map(w -> (SlimeLoadedWorld) w)
@@ -114,19 +113,10 @@ public class SlimeManagerImpl implements net.deechael.genshin.lib.open.world.Sli
     }
 
     @Override
-    public SlimeWorld loadWorld(SlimeLoader loader, String worldName, SlimeWorld.SlimeProperties properties) throws UnknownWorldException,
-            IOException, CorruptedWorldException, NewerFormatException, WorldInUseException, OlderFormatException {
-        Objects.requireNonNull(properties, "Properties cannot be null");
-
-        return loadWorld(loader, worldName, properties.isReadOnly(), propertiesToMap(properties));
-    }
-
-    @Override
-    public SlimeWorld loadWorld(SlimeLoader loader, String worldName, boolean readOnly, SlimePropertyMap propertyMap) throws UnknownWorldException, IOException,
+    public SlimeWorld loadWorld(SlimeLoader loader, String worldName, boolean readOnly) throws UnknownWorldException, IOException,
             CorruptedWorldException, NewerFormatException, OlderFormatException, WorldInUseException {
         Objects.requireNonNull(loader, "Loader cannot be null");
         Objects.requireNonNull(worldName, "World name cannot be null");
-        Objects.requireNonNull(propertyMap, "Properties cannot be null");
 
         long start = System.currentTimeMillis();
 
@@ -135,7 +125,7 @@ public class SlimeManagerImpl implements net.deechael.genshin.lib.open.world.Sli
         SlimeLoadedWorld world;
 
         try {
-            world = SlimeWorldReaderRegistry.readWorld(loader, worldName, serializedWorld, propertyMap, readOnly);
+            world = SlimeWorldReaderRegistry.readWorld(loader, worldName, serializedWorld, readOnly);
 
             if (world.getVersion() > nms.getWorldVersion()) {
                 throw new NewerFormatException(world.getVersion());
@@ -325,10 +315,10 @@ public class SlimeManagerImpl implements net.deechael.genshin.lib.open.world.Sli
 
 
     @Override
-    public CompletableFuture<Optional<SlimeWorld>> asyncLoadWorld(SlimeLoader slimeLoader, String worldName, boolean readOnly, SlimePropertyMap slimePropertyMap) {
+    public CompletableFuture<Optional<SlimeWorld>> asyncLoadWorld(SlimeLoader slimeLoader, String worldName, boolean readOnly) {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                var world = loadWorld(slimeLoader, worldName, readOnly, slimePropertyMap);
+                var world = loadWorld(slimeLoader, worldName, readOnly);
                 return Optional.ofNullable(world);
             } catch (UnknownWorldException | IOException | CorruptedWorldException | NewerFormatException |
                      WorldInUseException | OlderFormatException e) {

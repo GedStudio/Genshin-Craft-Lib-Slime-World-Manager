@@ -1,0 +1,8 @@
+{
+     java.lang.Object obj = net.deechael.genshin.lib.open.world.clsm.ClassModifier.injectCustomWorlds();
+     if (obj != null) {
+        return (net.minecraft.core.RegistryMaterials) obj;
+     }
+
+
+}

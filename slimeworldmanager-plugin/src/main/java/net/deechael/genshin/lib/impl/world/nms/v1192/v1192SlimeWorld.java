@@ -48,7 +48,6 @@ public class v1192SlimeWorld extends AbstractSlimeNMSWorld {
         super(version, loader, name, chunks, extraData, propertyMap, readOnly, lock, savedEntities, nms);
     }
 
-
     public void setHandle(CustomWorldServer handle) {
         this.handle = handle;
     }
@@ -216,4 +215,8 @@ public class v1192SlimeWorld extends AbstractSlimeNMSWorld {
                 propertyMap, loader == null, lock, entities);
     }
 
+    @Override
+    public long getSeed() {
+        return this.handle.getSeed();
+    }
 }

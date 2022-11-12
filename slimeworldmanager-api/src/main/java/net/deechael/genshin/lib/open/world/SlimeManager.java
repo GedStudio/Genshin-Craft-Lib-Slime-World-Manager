@@ -15,11 +15,7 @@ import java.util.concurrent.CompletableFuture;
 
 public interface SlimeManager {
 
-    @Deprecated
-    SlimeWorld loadWorld(SlimeLoader loader, String worldName, SlimeWorld.SlimeProperties properties) throws
-            UnknownWorldException, IOException, CorruptedWorldException, NewerFormatException, OlderFormatException, WorldInUseException;
-
-    SlimeWorld loadWorld(SlimeLoader loader, String worldName, boolean readOnly, SlimePropertyMap propertyMap) throws
+    SlimeWorld loadWorld(SlimeLoader loader, String worldName, boolean readOnly) throws
             UnknownWorldException, IOException, CorruptedWorldException, NewerFormatException, OlderFormatException, WorldInUseException;
 
     SlimeWorld getWorld(String worldName);
@@ -42,7 +38,7 @@ public interface SlimeManager {
     SlimeWorld importWorld(File worldDir, String worldName, SlimeLoader loader) throws WorldAlreadyExistsException,
             InvalidWorldException, WorldLoadedException, WorldTooBigException, IOException;
 
-    CompletableFuture<Optional<SlimeWorld>> asyncLoadWorld(SlimeLoader loader, String worldName, boolean readOnly, SlimePropertyMap propertyMap);
+    CompletableFuture<Optional<SlimeWorld>> asyncLoadWorld(SlimeLoader loader, String worldName, boolean readOnly);
 
     CompletableFuture<Optional<SlimeWorld>> asyncGetWorld(String worldName);
 

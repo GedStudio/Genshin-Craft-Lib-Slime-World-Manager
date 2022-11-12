@@ -32,6 +32,8 @@ public abstract class WorldManager {
 
     public abstract List<SlimeWorld> list(Plugin plugin, DataSource dataSource) throws IOException;
 
+    public abstract List<SlimeWorld> list(Plugin plugin);
+
     public abstract SlimeWorld get(Plugin plugin, String name);
 
     public abstract void moveTo(Plugin plugin, Player target, SlimeWorld destination);
@@ -42,9 +44,9 @@ public abstract class WorldManager {
 
     public abstract void migrate(Plugin plugin, SlimeWorld oldWorld, DataSource dataSource);
 
-    public abstract SlimeWorld createOrLoad(Plugin plugin, DataSource dataSource, String worldName, SlimePropertyMap slimePropertyMap);
+    public abstract SlimeWorld createOrLoad(Plugin plugin, DataSource dataSource, String worldName);
 
-    public abstract SlimeWorld load(Plugin plugin, DataSource dataSource, String worldName, SlimePropertyMap slimePropertyMap);
+    public abstract SlimeWorld load(Plugin plugin, DataSource dataSource, String worldName);
 
     public abstract boolean exists(Plugin plugin, DataSource dataSource, String worldName);
 

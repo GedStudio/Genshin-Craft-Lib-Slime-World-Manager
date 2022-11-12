@@ -1,0 +1,5 @@
+{
+    if (net.deechael.genshin.lib.open.world.clsm.ClassModifier.storeEntities($0, $1)) {
+        return true;
+    }
+}

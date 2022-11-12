@@ -203,14 +203,14 @@ public class v1_9SlimeWorldFormat implements SlimeWorldReader {
 
             // World properties
             SlimePropertyMap worldPropertyMap = propertyMap;
-            Optional<CompoundMap> propertiesMap = extraCompound
+            /* Optional<CompoundMap> propertiesMap = extraCompound
                     .getAsCompoundTag("properties")
                     .map(CompoundTag::getValue);
 
             if (propertiesMap.isPresent()) {
                 worldPropertyMap = new SlimePropertyMap(propertiesMap.get());
                 worldPropertyMap.merge(propertyMap); // Override world properties
-            } else if (propertyMap == null) { // Make sure the property map is never null
+            } else */ if (propertyMap == null) { // Make sure the property map is never null
                 worldPropertyMap = new SlimePropertyMap();
             }
 

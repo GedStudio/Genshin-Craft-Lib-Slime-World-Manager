@@ -10,3 +10,4 @@ pluginManagement {
 rootProject.name = "slimeworldmanager"
 include(":slimeworldmanager-api")
 include(":slimeworldmanager-plugin")
+include(":slimeworldmanager-clsm")

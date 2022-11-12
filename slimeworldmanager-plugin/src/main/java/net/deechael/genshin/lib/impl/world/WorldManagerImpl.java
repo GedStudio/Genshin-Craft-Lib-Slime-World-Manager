@@ -16,6 +16,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -82,6 +83,22 @@ public final class WorldManagerImpl extends WorldManager {
     }
 
     @Override
+    public List<SlimeWorld> list(Plugin plugin) {
+        List<SlimeWorld> slimeWorlds = new ArrayList<>();
+        for (DataSource dataSource : DataSource.values()) {
+            SlimeLoader loader = SlimeManagerImpl.getInstance().getLoader(dataSource);
+            if (loader == null)
+                continue;
+            try {
+                slimeWorlds.addAll(list(plugin, dataSource));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return slimeWorlds;
+    }
+
+    @Override
     public SlimeWorld get(Plugin plugin, String name) {
         return SlimeManagerImpl.getInstance().getWorld(name);
     }
@@ -133,9 +150,9 @@ public final class WorldManagerImpl extends WorldManager {
     }
 
     @Override
-    public SlimeWorld createOrLoad(Plugin plugin, DataSource dataSource, String worldName, SlimePropertyMap slimePropertyMap) {
+    public SlimeWorld createOrLoad(Plugin plugin, DataSource dataSource, String worldName) {
         if (exists(plugin, dataSource, worldName)) {
-            return load(plugin, dataSource, worldName, slimePropertyMap);
+            return load(plugin, dataSource, worldName);
         } else {
             try {
                 return create(plugin, dataSource, worldName);
@@ -146,10 +163,10 @@ public final class WorldManagerImpl extends WorldManager {
     }
 
     @Override
-    public SlimeWorld load(Plugin plugin, DataSource dataSource, String worldName, SlimePropertyMap slimePropertyMap) {
+    public SlimeWorld load(Plugin plugin, DataSource dataSource, String worldName) {
         SlimeLoader loader = SlimeManagerImpl.getInstance().getLoader(dataSource);
         try {
-            return SlimeManager.getManager().loadWorld(loader, "exp", false, slimePropertyMap);
+            return SlimeManager.getManager().loadWorld(loader, "exp", false);
         } catch (UnknownWorldException | IOException | CorruptedWorldException | NewerFormatException |
                  OlderFormatException | WorldInUseException e) {
             throw new RuntimeException(e);

@@ -44,6 +44,8 @@ public interface SlimeWorld {
 
     boolean isLocked();
 
+    long getSeed();
+
     default World asBukkit() {
         return Bukkit.getWorld(this.getName());
     }

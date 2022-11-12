@@ -2,6 +2,7 @@ package net.deechael.genshin.lib.open.world.properties;
 
 import net.deechael.genshin.lib.open.world.properties.type.SlimePropertyBoolean;
 import net.deechael.genshin.lib.open.world.properties.type.SlimePropertyInt;
+import net.deechael.genshin.lib.open.world.properties.type.SlimePropertyLong;
 import net.deechael.genshin.lib.open.world.properties.type.SlimePropertyString;
 import org.jetbrains.annotations.ApiStatus;
 
@@ -43,13 +44,16 @@ public class SlimeProperties {
 
     @ApiStatus.Experimental
     public static final SlimeProperty<Integer> SAVE_MIN_X = new SlimePropertyInt("saveMinX", 0);
+
     @ApiStatus.Experimental
     public static final SlimeProperty<Integer> SAVE_MIN_Z = new SlimePropertyInt("saveMinZ", 0);
 
     @ApiStatus.Experimental
     public static final SlimeProperty<Integer> SAVE_MAX_X = new SlimePropertyInt("saveMaxX", 0);
+
     @ApiStatus.Experimental
     public static final SlimeProperty<Integer> SAVE_MAX_Z = new SlimePropertyInt("saveMaxZ", 0);
 
+    public static final SlimeProperty<Long> SEED = new SlimePropertyLong("seed", 114514L);
 
 }

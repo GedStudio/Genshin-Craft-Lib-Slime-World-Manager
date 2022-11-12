@@ -97,7 +97,7 @@ public class CustomWorldServer extends ServerLevel {
         super(MinecraftServer.getServer(), MinecraftServer.getServer().executor,
                 v1192SlimeNMS.CUSTOM_LEVEL_STORAGE.createAccess(world.getName() + UUID.randomUUID(),
                         dimensionKey), primaryLevelData, worldKey, worldDimension,
-                MinecraftServer.getServer().progressListenerFactory.create(11), false, 0,
+                MinecraftServer.getServer().progressListenerFactory.create(11), false, world.getPropertyMap().getValue(SlimeProperties.SEED),
                 Collections.emptyList(), true, environment, gen, biomeProvider);
 
         this.slimeWorld = world;
