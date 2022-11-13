@@ -6,12 +6,12 @@ import com.mojang.serialization.Lifecycle;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import lombok.Getter;
 import net.deechael.genshin.lib.impl.world.nms.SlimeNMS;
-import net.deechael.genshin.lib.impl.world.nms.world.SlimeLoadedWorld;
 import net.deechael.genshin.lib.open.world.SlimeChunk;
+import net.deechael.genshin.lib.open.world.SlimeLoadedWorld;
 import net.deechael.genshin.lib.open.world.SlimeWorld;
-import net.deechael.genshin.lib.open.world.loaders.SlimeLoader;
-import net.deechael.genshin.lib.open.world.properties.SlimeProperties;
-import net.deechael.genshin.lib.open.world.properties.SlimePropertyMap;
+import net.deechael.genshin.lib.open.world.loader.SlimeLoader;
+import net.deechael.genshin.lib.open.world.property.SlimeProperties;
+import net.deechael.genshin.lib.open.world.property.SlimePropertyMap;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.Holder;
 import net.minecraft.core.MappedRegistry;
@@ -280,7 +280,7 @@ public class v1192SlimeNMS implements SlimeNMS {
             int dataVersion = levelData.getTagType("DataVersion") == Tag.TAG_INT ? levelData.getInt("DataVersion") : -1;
             Dynamic<Tag> dynamic = mcServer.getFixerUpper().update(DataFixTypes.LEVEL.getType(),
                     new Dynamic<>(NbtOps.INSTANCE, levelData), dataVersion, SharedConstants.getCurrentVersion()
-                            .getWorldVersion());
+                            .getDataVersion().getVersion());
 
             LevelVersion levelVersion = LevelVersion.parse(dynamic);
             LevelSettings worldSettings = LevelSettings.parse(dynamic, mcServer.datapackconfiguration);

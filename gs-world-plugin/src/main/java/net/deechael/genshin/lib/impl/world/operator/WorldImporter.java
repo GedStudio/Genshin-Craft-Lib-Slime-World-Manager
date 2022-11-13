@@ -9,13 +9,13 @@ import net.deechael.genshin.lib.impl.world.SlimeManagerImpl;
 import net.deechael.genshin.lib.impl.world.nms.CraftSlimeChunk;
 import net.deechael.genshin.lib.impl.world.nms.CraftSlimeChunkSection;
 import net.deechael.genshin.lib.impl.world.nms.NmsUtil;
-import net.deechael.genshin.lib.impl.world.nms.world.SlimeLoadedWorld;
 import net.deechael.genshin.lib.open.world.SlimeChunk;
 import net.deechael.genshin.lib.open.world.SlimeChunkSection;
-import net.deechael.genshin.lib.open.world.exceptions.InvalidWorldException;
-import net.deechael.genshin.lib.open.world.properties.SlimeProperties;
-import net.deechael.genshin.lib.open.world.properties.SlimePropertyMap;
-import net.deechael.genshin.lib.open.world.utils.NibbleArray;
+import net.deechael.genshin.lib.open.world.SlimeLoadedWorld;
+import net.deechael.genshin.lib.open.world.exception.InvalidWorldException;
+import net.deechael.genshin.lib.open.world.property.SlimeProperties;
+import net.deechael.genshin.lib.open.world.property.SlimePropertyMap;
+import net.deechael.genshin.lib.open.world.util.NibbleArray;
 
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -369,4 +369,18 @@ public class WorldImporter {
         private final int paddedSize;
 
     }
+
+    @Getter
+    @RequiredArgsConstructor
+    private static class LevelData {
+
+        private final int version;
+        private final Map<String, String> gameRules;
+
+        private final int spawnX;
+        private final int spawnY;
+        private final int spawnZ;
+
+    }
+
 }

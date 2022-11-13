@@ -1,6 +1,6 @@
 package net.deechael.genshin.lib.open.world;
 
-import net.deechael.genshin.lib.open.world.exceptions.WorldAlreadyExistsException;
+import net.deechael.genshin.lib.open.world.exception.WorldAlreadyExistsException;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 

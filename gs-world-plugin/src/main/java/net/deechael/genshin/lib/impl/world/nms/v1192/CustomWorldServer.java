@@ -18,10 +18,10 @@ import net.deechael.genshin.lib.impl.world.nms.NmsUtil;
 import net.deechael.genshin.lib.impl.world.nms.SlimeLogger;
 import net.deechael.genshin.lib.open.world.SlimeChunk;
 import net.deechael.genshin.lib.open.world.SlimeChunkSection;
-import net.deechael.genshin.lib.open.world.exceptions.UnknownWorldException;
-import net.deechael.genshin.lib.open.world.properties.SlimeProperties;
-import net.deechael.genshin.lib.open.world.properties.SlimePropertyMap;
-import net.deechael.genshin.lib.open.world.utils.NibbleArray;
+import net.deechael.genshin.lib.open.world.exception.UnknownWorldException;
+import net.deechael.genshin.lib.open.world.property.SlimeProperties;
+import net.deechael.genshin.lib.open.world.property.SlimePropertyMap;
+import net.deechael.genshin.lib.open.world.util.NibbleArray;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -189,9 +189,7 @@ public class CustomWorldServer extends ServerLevel {
             chunk = ((NMSSlimeChunk) slimeChunk).getChunk(); // This shouldn't happen anymore, unloading should cleanup the chunk
         } else {
             AtomicReference<NMSSlimeChunk> jank = new AtomicReference<>();
-            chunk = convertChunk(slimeChunk, () -> {
-                jank.get().dirtySlime();
-            });
+            chunk = convertChunk(slimeChunk, () -> jank.get().dirtySlime());
 
             NMSSlimeChunk nmsSlimeChunk = new NMSSlimeChunk(slimeChunk, chunk);
             jank.set(nmsSlimeChunk);
@@ -224,9 +222,7 @@ public class CustomWorldServer extends ServerLevel {
         if (v1192SlimeNMS.isPaperMC) {
             blockNibbles = ca.spottedleaf.starlight.common.light.StarLightEngine.getFilledEmptyLight(this);
             skyNibbles = ca.spottedleaf.starlight.common.light.StarLightEngine.getFilledEmptyLight(this);
-            getServer().scheduleOnMain(() -> {
-                getLightEngine().retainData(pos, true);
-            });
+            getServer().scheduleOnMain(() -> getLightEngine().retainData(pos, true));
         }
 
         Registry<Biome> biomeRegistry = this.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY);
@@ -273,7 +269,7 @@ public class CustomWorldServer extends ServerLevel {
                     });
                     biomePalette = dataresult.getOrThrow(false, System.err::println); // todo proper logging
                 } else {
-                    biomePalette = new PalettedContainer<>(biomeRegistry.asHolderIdMap(), biomeRegistry.getHolderOrThrow(Biomes.PLAINS), PalettedContainer.Strategy.SECTION_BIOMES);
+                    biomePalette = new PalettedContainer<>(biomeRegistry.asHolderIdMap(), biomeRegistry.getHolderOrThrow(Biomes.PLAINS), PalettedContainer.Strategy.SECTION_BIOMES, null);
                 }
 
                 if (sectionId < sections.length) {
@@ -385,9 +381,6 @@ public class CustomWorldServer extends ServerLevel {
     }
 
     public void handleEntityUnLoad(NewChunkHolder storage, ChunkEntitySlices entities) {
-        /**z
-         *  See: {@link ChunkEntitySlices#save()}
-         */
         EntityList entityList = null;
         SlimeLogger.debug("Saving entities for (%s,%s)".formatted(storage.chunkZ, storage.chunkZ));
         SlimeLogger.debug("E Saving entities for (%s,%s)".formatted(entities.chunkZ, entities.chunkZ));

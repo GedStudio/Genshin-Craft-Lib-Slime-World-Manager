@@ -2,7 +2,7 @@ package net.deechael.genshin.lib.open.world;
 
 import com.flowpowered.nbt.CompoundTag;
 import com.flowpowered.nbt.ListTag;
-import net.deechael.genshin.lib.open.world.utils.NibbleArray;
+import net.deechael.genshin.lib.open.world.util.NibbleArray;
 
 public interface SlimeChunkSection {
 

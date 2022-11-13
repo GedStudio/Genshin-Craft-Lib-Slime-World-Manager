@@ -2,10 +2,10 @@ package net.deechael.genshin.lib.impl.world.nms;
 
 import com.flowpowered.nbt.CompoundTag;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
-import net.deechael.genshin.lib.impl.world.nms.world.SlimeLoadedWorld;
 import net.deechael.genshin.lib.open.world.SlimeChunk;
-import net.deechael.genshin.lib.open.world.loaders.SlimeLoader;
-import net.deechael.genshin.lib.open.world.properties.SlimePropertyMap;
+import net.deechael.genshin.lib.open.world.SlimeLoadedWorld;
+import net.deechael.genshin.lib.open.world.loader.SlimeLoader;
+import net.deechael.genshin.lib.open.world.property.SlimePropertyMap;
 
 import java.util.List;
 

@@ -7,7 +7,7 @@ import com.mojang.serialization.Codec;
 import net.deechael.genshin.lib.impl.world.nms.CraftSlimeChunkSection;
 import net.deechael.genshin.lib.open.world.SlimeChunk;
 import net.deechael.genshin.lib.open.world.SlimeChunkSection;
-import net.deechael.genshin.lib.open.world.utils.NibbleArray;
+import net.deechael.genshin.lib.open.world.util.NibbleArray;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.SectionPos;

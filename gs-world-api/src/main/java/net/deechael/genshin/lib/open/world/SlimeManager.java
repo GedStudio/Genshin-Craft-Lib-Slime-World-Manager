@@ -1,9 +1,9 @@
 package net.deechael.genshin.lib.open.world;
 
 import net.deechael.genshin.lib.open.world.config.DataSourceConfig;
-import net.deechael.genshin.lib.open.world.exceptions.*;
-import net.deechael.genshin.lib.open.world.loaders.SlimeLoader;
-import net.deechael.genshin.lib.open.world.properties.SlimePropertyMap;
+import net.deechael.genshin.lib.open.world.exception.*;
+import net.deechael.genshin.lib.open.world.loader.SlimeLoader;
+import net.deechael.genshin.lib.open.world.property.SlimePropertyMap;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,9 +21,6 @@ public interface SlimeManager {
     SlimeWorld getWorld(String worldName);
 
     List<SlimeWorld> getLoadedWorlds();
-
-    @Deprecated
-    SlimeWorld createEmptyWorld(SlimeLoader loader, String worldName, SlimeWorld.SlimeProperties properties) throws WorldAlreadyExistsException, IOException;
 
     SlimeWorld createEmptyWorld(SlimeLoader loader, String worldName, boolean readOnly, SlimePropertyMap propertyMap) throws WorldAlreadyExistsException, IOException;
 

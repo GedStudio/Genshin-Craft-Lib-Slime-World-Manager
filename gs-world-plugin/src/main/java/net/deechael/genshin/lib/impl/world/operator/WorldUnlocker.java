@@ -2,7 +2,7 @@ package net.deechael.genshin.lib.impl.world.operator;
 
 import net.deechael.genshin.lib.impl.world.SlimeManagerImpl;
 import net.deechael.genshin.lib.open.world.SlimeWorld;
-import net.deechael.genshin.lib.open.world.exceptions.UnknownWorldException;
+import net.deechael.genshin.lib.open.world.exception.UnknownWorldException;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

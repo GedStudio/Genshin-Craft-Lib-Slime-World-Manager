@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 public class SlimeLogger {
 
-    private static final Logger LOGGER = Logger.getLogger("ASWM-INTERNAL");
+    private static final Logger LOGGER = Logger.getLogger("Gs World");
 
     public static boolean DEBUG = false;
 
@@ -14,4 +14,5 @@ public class SlimeLogger {
             LOGGER.log(Level.WARNING, message);
         }
     }
+
 }

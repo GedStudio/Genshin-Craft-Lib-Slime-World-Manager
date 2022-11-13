@@ -2,8 +2,8 @@ package net.deechael.genshin.lib.open.world.config;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.deechael.genshin.lib.open.world.properties.SlimeProperties;
-import net.deechael.genshin.lib.open.world.properties.SlimePropertyMap;
+import net.deechael.genshin.lib.open.world.property.SlimeProperties;
+import net.deechael.genshin.lib.open.world.property.SlimePropertyMap;
 import org.bukkit.Difficulty;
 import org.bukkit.World;
 

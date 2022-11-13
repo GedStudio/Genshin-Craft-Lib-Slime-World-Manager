@@ -7,13 +7,13 @@ import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import net.deechael.genshin.lib.impl.world.nms.NmsUtil;
 import net.deechael.genshin.lib.impl.world.nms.SlimeLogger;
 import net.deechael.genshin.lib.impl.world.nms.SlimeNMS;
-import net.deechael.genshin.lib.impl.world.nms.world.AbstractSlimeNMSWorld;
-import net.deechael.genshin.lib.impl.world.nms.world.ChunkSerialization;
-import net.deechael.genshin.lib.impl.world.nms.world.SlimeLoadedWorld;
+import net.deechael.genshin.lib.impl.world.nms.common.AbstractSlimeNMSWorld;
+import net.deechael.genshin.lib.impl.world.nms.common.ChunkSerialization;
 import net.deechael.genshin.lib.open.world.SlimeChunk;
 import net.deechael.genshin.lib.open.world.SlimeChunkSection;
-import net.deechael.genshin.lib.open.world.loaders.SlimeLoader;
-import net.deechael.genshin.lib.open.world.properties.SlimePropertyMap;
+import net.deechael.genshin.lib.open.world.SlimeLoadedWorld;
+import net.deechael.genshin.lib.open.world.loader.SlimeLoader;
+import net.deechael.genshin.lib.open.world.property.SlimePropertyMap;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 

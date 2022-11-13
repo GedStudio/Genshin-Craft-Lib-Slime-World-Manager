@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import net.deechael.genshin.lib.open.world.SlimeChunkSection;
-import net.deechael.genshin.lib.open.world.utils.NibbleArray;
+import net.deechael.genshin.lib.open.world.util.NibbleArray;
 import org.jetbrains.annotations.Nullable;
 
 @Getter

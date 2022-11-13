@@ -48,9 +48,7 @@ public final class AswmChunkProgressionTask extends ChunkProgressionTask {
                                      final NewChunkHolder chunkHolder, final PrioritisedExecutor.Priority priority) {
         super(scheduler, world, chunkX, chunkZ);
         this.chunkHolder = chunkHolder;
-        this.loadTask = new ChunkDataLoadTask(scheduler, world, chunkX, chunkZ, priority, (result) -> {
-            AswmChunkProgressionTask.this.complete(result == null ? null : result.left().orElse(null), result == null ? null : result.right().orElse(null));
-        });
+        this.loadTask = new ChunkDataLoadTask(scheduler, world, chunkX, chunkZ, priority, (result) -> AswmChunkProgressionTask.this.complete(result == null ? null : result.left().orElse(null), result == null ? null : result.right().orElse(null)));
 
 
         try {
@@ -294,9 +292,7 @@ public final class AswmChunkProgressionTask extends ChunkProgressionTask {
                     }
                 } else {
                     AtomicReference<NMSSlimeChunk> jank = new AtomicReference<>();
-                    chunk = ((CustomWorldServer) this.world).convertChunk(slimeChunk, () -> {
-                        jank.get().dirtySlime();
-                    });
+                    chunk = ((CustomWorldServer) this.world).convertChunk(slimeChunk, () -> jank.get().dirtySlime());
 
                     NMSSlimeChunk nmsSlimeChunk = new NMSSlimeChunk(slimeChunk, chunk);
                     jank.set(nmsSlimeChunk);

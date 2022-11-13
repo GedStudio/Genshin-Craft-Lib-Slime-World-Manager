@@ -5,27 +5,21 @@ import com.flowpowered.nbt.CompoundTag;
 import com.google.common.collect.ImmutableList;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import lombok.Getter;
-import net.deechael.genshin.lib.impl.world.loaders.LoaderUtils;
-import net.deechael.genshin.lib.impl.world.loaders.file.FileLoader;
-import net.deechael.genshin.lib.impl.world.loaders.mongo.MongoLoader;
-import net.deechael.genshin.lib.impl.world.loaders.mysql.MysqlLoader;
-import net.deechael.genshin.lib.impl.world.loaders.redis.RedisLoader;
-import net.deechael.genshin.lib.impl.world.loaders.slime.SlimeWorldReaderRegistry;
+import net.deechael.genshin.lib.impl.world.loader.*;
 import net.deechael.genshin.lib.impl.world.nms.SlimeNMS;
 import net.deechael.genshin.lib.impl.world.nms.v1192.v1192SlimeNMS;
-import net.deechael.genshin.lib.impl.world.nms.world.SlimeLoadedWorld;
 import net.deechael.genshin.lib.impl.world.operator.WorldImporter;
 import net.deechael.genshin.lib.impl.world.operator.WorldUnlocker;
+import net.deechael.genshin.lib.impl.world.reader.SlimeWorldReaderRegistry;
 import net.deechael.genshin.lib.open.world.DataSource;
+import net.deechael.genshin.lib.open.world.SlimeLoadedWorld;
 import net.deechael.genshin.lib.open.world.SlimeWorld;
 import net.deechael.genshin.lib.open.world.WorldManager;
 import net.deechael.genshin.lib.open.world.config.*;
-import net.deechael.genshin.lib.open.world.exceptions.*;
-import net.deechael.genshin.lib.open.world.loaders.SlimeLoader;
-import net.deechael.genshin.lib.open.world.properties.SlimeProperties;
-import net.deechael.genshin.lib.open.world.properties.SlimePropertyMap;
+import net.deechael.genshin.lib.open.world.exception.*;
+import net.deechael.genshin.lib.open.world.loader.SlimeLoader;
+import net.deechael.genshin.lib.open.world.property.SlimePropertyMap;
 import org.bukkit.Bukkit;
-import org.bukkit.Difficulty;
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -63,11 +57,7 @@ public class SlimeManagerImpl implements net.deechael.genshin.lib.open.world.Sli
         SlimeManagerImpl.plugin = plugin;
         isPaperMC = checkIsPaper();
 
-        try {
-            nms = getNMSBridge();
-        } catch (InvalidVersionException ex) {
-            plugin.getSLF4JLogger().error(ex.getMessage());
-        }
+        nms = getNMSBridge();
         WorldManager.setManager(WorldManagerImpl.INSTANCE);
     }
 
@@ -108,7 +98,7 @@ public class SlimeManagerImpl implements net.deechael.genshin.lib.open.world.Sli
                 });
     }
 
-    private SlimeNMS getNMSBridge() throws InvalidVersionException {
+    private SlimeNMS getNMSBridge() {
         return new v1192SlimeNMS(isPaperMC);
     }
 
@@ -156,13 +146,6 @@ public class SlimeManagerImpl implements net.deechael.genshin.lib.open.world.Sli
     }
 
     @Override
-    public SlimeWorld createEmptyWorld(SlimeLoader loader, String worldName, SlimeWorld.SlimeProperties properties) throws WorldAlreadyExistsException, IOException {
-        Objects.requireNonNull(properties, "Properties cannot be null");
-
-        return createEmptyWorld(loader, worldName, properties.isReadOnly(), propertiesToMap(properties));
-    }
-
-    @Override
     public SlimeWorld createEmptyWorld(SlimeLoader loader, String worldName, boolean readOnly, SlimePropertyMap propertyMap) throws WorldAlreadyExistsException, IOException {
         Objects.requireNonNull(loader, "Loader cannot be null");
         Objects.requireNonNull(worldName, "World name cannot be null");
@@ -182,21 +165,6 @@ public class SlimeManagerImpl implements net.deechael.genshin.lib.open.world.Sli
         registerWorld(world);
         this.loadedWorlds.put(worldName, world);
         return world;
-    }
-
-    private SlimePropertyMap propertiesToMap(SlimeWorld.SlimeProperties properties) {
-        SlimePropertyMap propertyMap = new SlimePropertyMap();
-
-        propertyMap.setValue(SlimeProperties.SPAWN_X, (int) properties.getSpawnX());
-        propertyMap.setValue(SlimeProperties.SPAWN_Y, (int) properties.getSpawnY());
-        propertyMap.setValue(SlimeProperties.SPAWN_Z, (int) properties.getSpawnZ());
-        propertyMap.setValue(SlimeProperties.DIFFICULTY, Difficulty.getByValue(properties.getDifficulty()).name());
-        propertyMap.setValue(SlimeProperties.ALLOW_MONSTERS, properties.allowMonsters());
-        propertyMap.setValue(SlimeProperties.ALLOW_ANIMALS, properties.allowAnimals());
-        propertyMap.setValue(SlimeProperties.PVP, properties.isPvp());
-        propertyMap.setValue(SlimeProperties.ENVIRONMENT, properties.getEnvironment());
-
-        return propertyMap;
     }
 
     /**
@@ -266,8 +234,7 @@ public class SlimeManagerImpl implements net.deechael.genshin.lib.open.world.Sli
     @Override
     public SlimeLoader getLoader(DataSource dataSource) {
         Objects.requireNonNull(dataSource, "Data source cannot be null");
-
-        return LoaderUtils.getLoader(dataSource.name().toLowerCase());
+        return LoaderUtils.getLoader(dataSource);
     }
 
     @Override
@@ -278,8 +245,9 @@ public class SlimeManagerImpl implements net.deechael.genshin.lib.open.world.Sli
             case MYSQL -> new MysqlLoader((MysqlConfig) config);
             case MONGO -> new MongoLoader((MongoDBConfig) config);
             case REDIS -> new RedisLoader((RedisConfig) config);
+            case SQLITE -> new SqliteLoader((SqliteConfig) config);
         };
-        LoaderUtils.registerLoader(config.getType().name().toLowerCase(), slimeLoader);
+        LoaderUtils.registerLoader(config.getType(), slimeLoader);
     }
 
     @Override

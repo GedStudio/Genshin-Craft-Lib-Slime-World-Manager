@@ -2,7 +2,7 @@ package net.deechael.genshin.lib.impl.world.nms.v1192;
 
 import com.flowpowered.nbt.CompoundMap;
 import com.flowpowered.nbt.TagType;
-import net.deechael.genshin.lib.open.world.utils.NibbleArray;
+import net.deechael.genshin.lib.open.world.util.NibbleArray;
 import net.minecraft.nbt.*;
 import net.minecraft.world.level.chunk.DataLayer;
 import org.apache.logging.log4j.LogManager;
