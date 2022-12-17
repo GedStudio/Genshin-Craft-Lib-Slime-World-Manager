@@ -29,6 +29,8 @@ public abstract class WorldManager {
 
     public abstract void delete(Plugin plugin, SlimeWorld world);
 
+    public abstract void delete(Plugin plugin, String worldName);
+
     public abstract List<SlimeWorld> list(Plugin plugin, DataSource dataSource) throws IOException;
 
     public abstract List<SlimeWorld> list(Plugin plugin);

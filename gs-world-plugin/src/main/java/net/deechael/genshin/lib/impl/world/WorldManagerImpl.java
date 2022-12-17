@@ -66,7 +66,21 @@ public final class WorldManagerImpl extends WorldManager {
                     plugin.getSLF4JLogger().error("World " + world.getName() + " is being used on another server.");
                     return;
                 }
+                this.unload(plugin, world);
                 world.getLoader().deleteWorld(world.getName());
+            } catch (IOException ex) {
+                SlimeManagerImpl.getPlugin().getSLF4JLogger().error("Failed to delete world " + world.getName() + ". Stack trace:", ex);
+            } catch (UnknownWorldException e) {
+                throw new RuntimeException(e);
+            }
+
+        });
+    }
+
+    @Override
+    public void delete(Plugin plugin, String worldName) {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                world.getLoader().deleteWorld(worldName);
             } catch (IOException ex) {
                 SlimeManagerImpl.getPlugin().getSLF4JLogger().error("Failed to delete world " + world.getName() + ". Stack trace:", ex);
             } catch (UnknownWorldException e) {
