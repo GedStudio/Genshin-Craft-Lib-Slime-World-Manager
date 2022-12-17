@@ -83,7 +83,7 @@ public final class WorldManagerImpl extends WorldManager {
             try {
                 loader.deleteWorld(worldName);
             } catch (IOException ex) {
-                SlimeManagerImpl.getPlugin().getSLF4JLogger().error("Failed to delete world " + world.getName() + ". Stack trace:", ex);
+                SlimeManagerImpl.getPlugin().getSLF4JLogger().error("Failed to delete world " + worldName + ". Stack trace:", ex);
             } catch (UnknownWorldException e) {
                 throw new RuntimeException(e);
             }
