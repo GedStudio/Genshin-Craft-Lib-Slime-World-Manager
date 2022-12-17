@@ -1,7 +1,6 @@
 package net.deechael.genshin.lib.open.world;
 
 import net.deechael.genshin.lib.open.world.exception.WorldAlreadyExistsException;
-import net.deechael.genshin.lib.open.world.loader.SlimeLoader;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -30,7 +29,7 @@ public abstract class WorldManager {
 
     public abstract void delete(Plugin plugin, SlimeWorld world);
 
-    public abstract void delete(Plugin plugin, SlimeLoader loader, String worldName);
+    public abstract void delete(Plugin plugin, DataSource dataSource, String worldName);
 
     public abstract List<SlimeWorld> list(Plugin plugin, DataSource dataSource) throws IOException;
 

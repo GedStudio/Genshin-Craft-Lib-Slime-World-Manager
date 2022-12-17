@@ -78,7 +78,9 @@ public final class WorldManagerImpl extends WorldManager {
     }
 
     @Override
-    public void delete(Plugin plugin, SlimeLoader loader, String worldName) {
+    public void delete(Plugin plugin, DataSource dataSource, String worldName) {
+        SlimeLoader loader = SlimeManagerImpl.getInstance().getLoader(dataSource);
+
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             try {
                 loader.deleteWorld(worldName);
