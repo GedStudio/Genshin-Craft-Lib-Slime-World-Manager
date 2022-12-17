@@ -80,6 +80,7 @@ public final class WorldManagerImpl extends WorldManager {
     @Override
     public void delete(Plugin plugin, String worldName) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            try {
                 world.getLoader().deleteWorld(worldName);
             } catch (IOException ex) {
                 SlimeManagerImpl.getPlugin().getSLF4JLogger().error("Failed to delete world " + world.getName() + ". Stack trace:", ex);
