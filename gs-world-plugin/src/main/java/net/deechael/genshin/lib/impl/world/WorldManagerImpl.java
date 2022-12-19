@@ -183,7 +183,9 @@ public final class WorldManagerImpl extends WorldManager {
     public SlimeWorld load(Plugin plugin, DataSource dataSource, String worldName) {
         SlimeLoader loader = SlimeManagerImpl.getInstance().getLoader(dataSource);
         try {
-            return SlimeManager.getManager().generateWorld(SlimeManager.getManager().loadWorld(loader, worldName, false));
+            SlimeWorld world = SlimeManager.getManager().loadWorld(loader, worldName, false);
+            SlimeManager.getManager().generateWorld(world);
+            return world;
         } catch (UnknownWorldException | IOException | CorruptedWorldException | NewerFormatException |
                  OlderFormatException | WorldInUseException e) {
             throw new RuntimeException(e);
