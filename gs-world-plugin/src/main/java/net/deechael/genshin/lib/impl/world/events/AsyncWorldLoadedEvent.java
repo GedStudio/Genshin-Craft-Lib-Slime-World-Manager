@@ -3,11 +3,12 @@ package net.deechael.genshin.lib.impl.world.events;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class WorldLoadedEvent extends Event {
+public class AsyncWorldLoadedEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
     private final String name;
 
-    public WorldLoadedEvent(String name) {
+    public AsyncWorldLoadedEvent(String name) {
+        super(true);
         this.name = name;
     }
 

@@ -5,7 +5,7 @@ import com.flowpowered.nbt.CompoundTag;
 import com.google.common.collect.ImmutableList;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import lombok.Getter;
-import net.deechael.genshin.lib.impl.world.events.WorldLoadedEvent;
+import net.deechael.genshin.lib.impl.world.events.AsyncWorldLoadedEvent;
 import net.deechael.genshin.lib.impl.world.loader.*;
 import net.deechael.genshin.lib.impl.world.nms.SlimeNMS;
 import net.deechael.genshin.lib.impl.world.nms.v1192.v1192SlimeNMS;
@@ -134,7 +134,7 @@ public class SlimeManagerImpl implements net.deechael.genshin.lib.open.world.Sli
 
         registerWorld(world);
         this.loadedWorlds.put(worldName, world);
-        WorldLoadedEvent worldLoadedEvent = new WorldLoadedEvent(worldName);
+        AsyncWorldLoadedEvent worldLoadedEvent = new AsyncWorldLoadedEvent(worldName);
         Bukkit.getPluginManager().callEvent(worldLoadedEvent);
         return world;
     }
