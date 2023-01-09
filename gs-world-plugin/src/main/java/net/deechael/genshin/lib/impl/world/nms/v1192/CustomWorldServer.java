@@ -13,6 +13,7 @@ import io.papermc.paper.chunk.system.scheduling.NewChunkHolder;
 import io.papermc.paper.world.ChunkEntitySlices;
 import lombok.Getter;
 import lombok.Setter;
+import net.deechael.genshin.lib.impl.world.events.WorldSavedEvent;
 import net.deechael.genshin.lib.impl.world.nms.CraftSlimeChunk;
 import net.deechael.genshin.lib.impl.world.nms.NmsUtil;
 import net.deechael.genshin.lib.impl.world.nms.SlimeLogger;
@@ -166,6 +167,8 @@ public class CustomWorldServer extends ServerLevel {
                 long saveStart = System.currentTimeMillis();
                 slimeWorld.getLoader().saveWorld(slimeWorld.getName(), serializedWorld, false);
                 Bukkit.getLogger().log(Level.INFO, "World " + slimeWorld.getName() + " serialized in " + (saveStart - start) + "ms and saved in " + (System.currentTimeMillis() - saveStart) + "ms.");
+                WorldSavedEvent worldSavedEvent = new WorldSavedEvent(slimeWorld.getName());
+                Bukkit.getPluginManager().callEvent(worldSavedEvent);
             } catch (IOException | IllegalStateException ex) {
                 ex.printStackTrace();
             }
