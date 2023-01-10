@@ -167,7 +167,7 @@ public class CustomWorldServer extends ServerLevel {
                 long saveStart = System.currentTimeMillis();
                 slimeWorld.getLoader().saveWorld(slimeWorld.getName(), serializedWorld, false);
                 Bukkit.getLogger().log(Level.INFO, "World " + slimeWorld.getName() + " serialized in " + (saveStart - start) + "ms and saved in " + (System.currentTimeMillis() - saveStart) + "ms.");
-                AsyncWorldSavedEvent worldSavedEvent = new AsyncWorldSavedEvent(slimeWorld.getName());
+                AsyncWorldSavedEvent worldSavedEvent = new AsyncWorldSavedEvent(slimeWorld.getName(), !Bukkit.isPrimaryThread());
                 Bukkit.getPluginManager().callEvent(worldSavedEvent);
             } catch (IOException | IllegalStateException ex) {
                 ex.printStackTrace();

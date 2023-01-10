@@ -7,8 +7,8 @@ public class AsyncWorldSavedEvent extends Event {
     private static final HandlerList handlers = new HandlerList();
     private final String name;
 
-    public AsyncWorldSavedEvent(String name) {
-        super(true);
+    public AsyncWorldSavedEvent(String name, boolean async) {
+        super(async);
         this.name = name;
     }
 
