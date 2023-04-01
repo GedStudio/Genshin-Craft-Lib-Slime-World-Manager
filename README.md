@@ -75,3 +75,16 @@ WorldManager worldManager = WorldManager.getManager(); // Added by DeeChael
 ```
 
 #### Don't forget to use the modified classmodifier in gs-world-clsm module!
+
+## Credits
+Thanks to:
+
+All the contributors that actively maintain ASWM and added features to SWM.
+Paul19988 - ASWM Creator.
+ComputerNerd100 - Large Contributor & Maintainer.
+b0ykoe - Provider of build services & repositories.
+Owen1212055 - Large Contributor & Maintainer.
+Gerolmed - Contributor & Maintainer.
+Grinderwolf - The original creator.
+Glare - Providing the original Maven repository.
+Minikloon and all the Hypixel team for developing the SRF.
