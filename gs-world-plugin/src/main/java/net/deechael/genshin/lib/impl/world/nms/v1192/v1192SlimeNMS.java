@@ -5,6 +5,7 @@ import com.mojang.serialization.Dynamic;
 import com.mojang.serialization.Lifecycle;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import lombok.Getter;
+import net.deechael.genshin.lib.impl.world.events.WorldGeneratedEvent;
 import net.deechael.genshin.lib.impl.world.nms.SlimeNMS;
 import net.deechael.genshin.lib.open.world.SlimeChunk;
 import net.deechael.genshin.lib.open.world.SlimeLoadedWorld;
@@ -174,6 +175,7 @@ public class v1192SlimeNMS implements SlimeNMS {
 
         CustomWorldServer server = createCustomWorld(world, null);
         registerWorld(server);
+        Bukkit.getPluginManager().callEvent(new WorldGeneratedEvent(worldName));
     }
 
     @Override
